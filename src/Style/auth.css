@@ -1,0 +1,28 @@
+.sing {
+  width: 450px;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 10px;
+  gap: 15px;
+}
+.sing h2 {
+  font-size: 1.8rem;
+  color: var(--Prcl);
+  text-align: center;
+}
+.form-controle {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.form-controle input {
+  padding: 5px 12px;
+  transition: 0.5s;
+  border-radius: 8px;
+  outline: none;
+  border: solid #111111ac 1.5px;
+  color: var(--Prcl);
+}
+.form-controle input:focus {
+  background-color: #e8f0fe;
+}
