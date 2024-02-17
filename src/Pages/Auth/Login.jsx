@@ -1,6 +1,7 @@
 import Cookies from "universal-cookie";
 import Axios from "../../base/Axios";
 import { useState } from "react";
+import Error from "../../Components/Error";
 
 let Login = () => {
   let [form, setForm] = useState({ email: "", password: "" });
@@ -71,7 +72,7 @@ let Login = () => {
             Login
           </button>
         </div>
-        {err && <small className="error"> {err} </small>}
+        {err && <Error err={err}></Error>}
         <div className="f-center">
           <p>
             Or go to <a href="/sing">Sing in</a>

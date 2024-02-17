@@ -1,6 +1,7 @@
 import Cookies from "universal-cookie";
 import Axios from "../../base/Axios";
 import { useState } from "react";
+import Error from "../../Components/Error";
 
 let Sing = () => {
   let [err, setErr] = useState("");
@@ -84,7 +85,7 @@ let Sing = () => {
             Sing
           </button>
         </div>
-        {err && <small className="error"> {err} </small>}
+        {err && <Error err={err}></Error>}
 
         <div className="f-center">
           <p>

@@ -15,8 +15,22 @@
   flex-direction: column;
   gap: 5px;
 }
+.form-controle label {
+  font-size: 1.1rem;
+}
 .form-controle input {
   padding: 5px 12px;
+  transition: 0.5s;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  outline: none;
+  border: solid #111111ac 1.5px;
+  color: var(--Prcl);
+}
+.form-controle textarea {
+  font-size: 1.2rem;
+  padding: 5px 12px;
+  resize: none;
   transition: 0.5s;
   border-radius: 8px;
   outline: none;

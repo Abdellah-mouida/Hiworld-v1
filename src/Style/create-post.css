@@ -1,0 +1,8 @@
+.create-post h2 {
+  font-size: 6vmin;
+  text-align: center;
+  color: var(--low-black);
+}
+.create-post textarea {
+  height: 250px;
+}

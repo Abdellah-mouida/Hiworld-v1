@@ -6,6 +6,7 @@
 }
 :root {
   --Prcl: #0033ff;
+
   --low-white: #eee;
   --low-black: #111;
 }
@@ -19,6 +20,7 @@
 .container {
   width: 80%;
   margin: 0 auto;
+  padding: 2rem 0;
 }
 .auth-container {
   height: 100svh;
@@ -60,5 +62,17 @@ a {
   width: 100%;
   border-radius: 10px;
   padding: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
   font-weight: 500;
+}
+.error i {
+  padding: 0 10px;
+}
+.Link {
+  text-decoration: none;
+}
+.home {
+  padding-top: 60px;
 }

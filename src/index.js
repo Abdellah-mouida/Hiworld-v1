@@ -8,6 +8,10 @@ import "./Style/all.min.css";
 //Style
 import "./Style/base.css";
 import "./Style/auth.css";
+import "./Style/nav.css";
+import "./Style/posts.css";
+import "./Style/create-post.css";
+import "./Style/filepond.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
