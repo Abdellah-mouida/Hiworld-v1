@@ -1,8 +1,7 @@
 import Cookies from "universal-cookie";
 import Axios from "../../base/Axios";
 import { useState } from "react";
-import Error from "../../Components/Error";
-
+import Error from "../../Material UI/Error";
 let Sing = () => {
   let [err, setErr] = useState("");
   let cookie = new Cookies();
@@ -25,7 +24,7 @@ let Sing = () => {
         let userId = res.data.user._id;
         cookie.set("hiworld-user-id", userId);
         setErr("");
-        window.location.pathname = "/";
+        window.location.pathname = "/home";
         console.log(res);
       } catch (err) {
         if (err.response.status !== 201) {
@@ -85,6 +84,7 @@ let Sing = () => {
             Sing
           </button>
         </div>
+
         {err && <Error err={err}></Error>}
 
         <div className="f-center">

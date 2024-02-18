@@ -1,9 +1,10 @@
+import { Alert } from "@mui/material";
+
 let Error = (props) => {
   return (
-    <small style={{ display: "flex" }} className="error">
-      {" "}
-      <i className="fa-solid fa-triangle-exclamation"></i> {props.err}{" "}
-    </small>
+    <Alert sx={{ backgroundColor: "#ff5f5f34" }} severity="error">
+      {props.err}{" "}
+    </Alert>
   );
 };
 export default Error;

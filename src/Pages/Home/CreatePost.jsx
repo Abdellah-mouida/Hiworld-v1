@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 
 // Import React FilePond
 import { FilePond, File, registerPlugin } from "react-filepond";
-import FilePondPluginFileEncode from "filepond-plugin-file-encode/dist/filepond-plugin-file-encode.min.js"; // Import the plugin
 
 // Import FilePond styles
 import "filepond/dist/filepond.min.css";
@@ -11,30 +10,35 @@ import "filepond/dist/filepond.min.css";
 // Import the Image EXIF Orientation and Image Preview plugins
 // Note: These need to be installed separately
 // `npm i filepond-plugin-image-preview filepond-plugin-image-exif-orientation --save`
+import FilePondPluginFileEncode from "filepond-plugin-file-encode/dist/filepond-plugin-file-encode.min.js"; // Import the plugin
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import FilePondPluginImageResize from "filepond-plugin-image-resize";
 
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
-import "filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js";
+// import "filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js";
+// import "filepond-plugin-image-resize/dist/filepond-plugin-image-resize.min.css";
 import Cookies from "universal-cookie";
 import Axios from "../../base/Axios";
-import Error from "../../Components/Error";
+import Error from "../../Material UI/Error";
+import { useNavigate } from "react-router-dom";
 
 // Register the plugins
 let CreatePost = () => {
   let cookie = new Cookies();
   let id = cookie.get("hiworld-user-id");
-
+  let nav = useNavigate();
   let [err, setErr] = useState("");
 
   registerPlugin(
     FilePondPluginFileEncode,
     FilePondPluginImageExifOrientation,
-    FilePondPluginImagePreview
+    FilePondPluginImagePreview,
+    FilePondPluginImageResize
   );
   let [form, setForm] = useState({
     user: id,
-    descritpion: "",
+    description: "",
     image: "",
   });
 
@@ -42,8 +46,9 @@ let CreatePost = () => {
     e.preventDefault();
     try {
       let res = await Axios.post("/posts", form);
-      console.log(res);
       // window.location.pathname = "/home";
+      nav("/home");
+      console.log(res);
     } catch (err) {
       if (err.response.status === 400) {
         setErr(err.response.data);
@@ -61,9 +66,9 @@ let CreatePost = () => {
           <label htmlFor="">Description Or Note</label>
           <textarea
             name="descrition"
-            value={form.descritpion}
+            value={form.description}
             onChange={(e) => {
-              setForm({ ...form, descritpion: e.target.value });
+              setForm({ ...form, description: e.target.value });
             }}
           ></textarea>
         </div>
@@ -79,6 +84,9 @@ let CreatePost = () => {
               console.error("File processing error:", error);
             }
           }}
+          imageResizeMode="cover"
+          imageResizeTargetWidth={300}
+          imageResizeTargetHeight={200}
           allowFileEncode={true}
           allowImagePreview={true}
           fileEncodeBase64String={true} // Set this to true to return the file as base64 encoded string

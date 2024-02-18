@@ -12,6 +12,8 @@ import "./Style/nav.css";
 import "./Style/posts.css";
 import "./Style/create-post.css";
 import "./Style/filepond.css";
+import "./Style/post.css";
+import "./Style/profile.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

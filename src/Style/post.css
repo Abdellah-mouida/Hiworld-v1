@@ -1,0 +1,82 @@
+.post {
+  gap: 15px;
+  width: 70%;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+}
+
+.post header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+/* .post-info {
+  gap: 9px;
+} */
+.post-info p {
+  opacity: 0.8;
+  font-size: 0.9rem;
+}
+.post-info h4 {
+  font-size: 1.1rem;
+}
+.post-img {
+  width: 100%;
+  background-color: var(--low-white);
+  border-radius: 10px;
+  margin: 0.5rem 0;
+  background-position: center;
+  height: 400px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.post-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.post-desc {
+  padding-left: 10px;
+}
+.post-desc {
+  white-space-collapse: break-spaces;
+}
+.post-action p {
+  padding: 1rem 3rem;
+  /* background-color: var(--low-white); */
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.post-action p i {
+  font-size: 1.3rem;
+}
+.post-action p:nth-child(1) {
+  color: var(--Prcl);
+}
+.post-action p:nth-child(2) {
+  color: var(--low-black);
+}
+.post-action p:nth-child(3) {
+  color: #ff7300;
+}
+.post-action p:nth-child(1):hover {
+  background-color: rgba(0, 51, 255, 0.255);
+}
+.post-action p:nth-child(2):hover {
+  background-color: rgba(17, 17, 17, 0.255);
+}
+.post-action p:nth-child(3):hover {
+  background-color: rgba(255, 115, 0, 0.255);
+}
+.post-profile {
+  background-position: center;
+  background-size: cover;
+  background-color: var(--low-white);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}

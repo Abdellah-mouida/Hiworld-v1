@@ -1,0 +1,43 @@
+.profile-img {
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.155);
+  width: 30vmin;
+  height: 30vmin;
+  border-radius: 50%;
+  position: relative;
+  background-color: var(--low-white);
+}
+.user-info {
+  gap: 10px;
+  display: block;
+  height: 20vmin;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+.user-info h4 {
+  font-size: 5vmin;
+  color: var(--low-black);
+}
+.user-info p {
+  opacity: 0.8;
+}
+.profile-img svg {
+  display: none;
+}
+.profile-img .fa-pen {
+  position: absolute;
+  font-size: 4vmin;
+  padding: 3vmin;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 5px 2px #00000034;
+  bottom: -2px;
+  background-color: var(--low-white);
+  color: var(--Prcl);
+  right: 0;
+}
+.profile header {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
