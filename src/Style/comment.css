@@ -1,0 +1,126 @@
+.comment-dialoge {
+  position: fixed;
+}
+
+.dialog-container {
+  width: 64vw;
+  height: 600px;
+  padding: 0;
+}
+.dialog-container h2 {
+  font-size: 5vmin;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.comment-user-img {
+  width: 40px;
+  height: 40px;
+  background-color: var(--Prcl);
+  border-radius: 50%;
+  box-shadow: 0 0 5px 2px #00000034;
+}
+.comment header {
+  display: flex;
+  gap: 10px;
+  font-size: 0.9rem;
+}
+.c-rev header {
+  flex-direction: row-reverse;
+}
+.c-rev .f-colum {
+  align-items: end;
+}
+.c-rev .comment-info {
+  flex-direction: row-reverse;
+}
+.c-rev .comment-content {
+  background-color: var(--Prcl);
+  color: var(--low-white);
+}
+.comment .comment-info p {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+  padding: 0.7rem 0.9rem;
+  border-radius: 8px;
+  /* background-color: #eeeeeed9; */
+}
+.comment-info {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+}
+.comment .d-colum {
+  width: 100%;
+  flex: 1;
+}
+.comments {
+  /* gap: 15px; */
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  height: 400px;
+  margin: 10px;
+  padding: 15px;
+}
+.comments::-webkit-scrollbar {
+  background-color: #fff;
+  width: 8px;
+}
+.comments::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #0033ff55, var(--low-white));
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.comment-content {
+  padding: 0.9rem 1.1rem;
+  border-radius: 10px;
+  /* width: fit-content; */
+  width: 100%;
+  white-space-collapse: break-spaces;
+  flex: 1;
+}
+.create-comment {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin: 1rem 0;
+  gap: 10px;
+  height: 100px;
+  bottom: 0;
+  box-shadow: 0 -2px 10px 2px #00000034;
+  left: 0;
+}
+.create-comment textarea {
+  resize: none;
+  border: none;
+  font-size: 1.08rem;
+  flex-grow: 1;
+  width: 100%;
+  color: black;
+  outline: none;
+  padding: 10px;
+}
+.create-comment textarea::-webkit-scrollbar {
+  display: none;
+}
+.dialog-container button {
+  padding: 1rem;
+  background-color: transparent;
+  color: var(--Prcl);
+  font-size: 1.5rem;
+  position: absolute;
+  top: 9px;
+  opacity: 0;
+  right: 20px;
+}

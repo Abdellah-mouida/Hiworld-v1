@@ -14,6 +14,8 @@ import Logout from "@mui/icons-material/Logout";
 import Email from "@mui/icons-material/Email"; // Additional icon
 import Notifications from "@mui/icons-material/Notifications"; // Additional icon
 import { Link } from "react-router-dom";
+import Cookies from "universal-cookie";
+import { HIWORLD_COOKIE_NAME } from "../base/CookieName";
 
 export default function AccountMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -35,11 +37,12 @@ export default function AccountMenu(props) {
       >
         <Tooltip
           title="Menu"
-          sx={{
-            backgroundColor: "var(--Prcl)",
-            fontSize: "1rem",
-            padding: "10px",
-          }}
+
+          // sx={{
+          //   backgroundColor: "var(--Prcl)",
+          //   fontSize: "1rem",
+          //   padding: "10px",
+          // }}
         >
           <IconButton
             onClick={handleClick}
@@ -69,6 +72,9 @@ export default function AccountMenu(props) {
                   fontSize: "1.5rem",
                   backgroundColor: "var(--Prcl)",
                   overflow: "visible",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
                 className="profile-img"
               >
@@ -87,9 +93,11 @@ export default function AccountMenu(props) {
         PaperProps={{
           elevation: 0,
           sx: {
-            width: "250px",
+            width: "300px",
             overflow: "visible",
             color: "var(--Prcl)",
+            borderRadius: "15px",
+            padding: "0.5rem 1rem",
             filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
 
             mt: 1.5,
@@ -116,8 +124,8 @@ export default function AccountMenu(props) {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <Link to={"profile"}>
-          <MenuItem onClick={handleClose}>
+        <Link to={"profile/myPost"} className="Link">
+          <div className="menu-item">
             {/* <div className="img-nav-profile"></div> Profile */}
             {props?.user?.profile ? (
               <Avatar
@@ -146,35 +154,43 @@ export default function AccountMenu(props) {
               </Avatar>
             )}
             Profile
-          </MenuItem>
+          </div>
         </Link>
 
-        <Divider />
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Settings
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          Logout
-        </MenuItem>
+        <Divider style={{ margin: "10px" }} />
+
         {/* Additional Menu Items */}
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <Email fontSize="small" />
-          </ListItemIcon>
-          Email
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <Notifications fontSize="small" />
-          </ListItemIcon>
-          Notifications
-        </MenuItem>
+
+        <div className="menu-container">
+          <Link className="Link" to={"/create-post"}>
+            <div className="menu-item">
+              <i className="fas fa-plus"></i>
+              Create Post
+            </div>
+          </Link>
+          <div className="menu-item">
+            <i className="fas fa-comments"></i>
+            Chate
+          </div>
+          <div className="menu-item">
+            <i className="fas fa-bookmark"></i>
+            Saved
+          </div>
+          <div className="menu-item">
+            <i className="fas fa-info-circle"></i>
+            About us
+          </div>
+          <div
+            className="menu-item"
+            onClick={() => {
+              new Cookies().remove(HIWORLD_COOKIE_NAME);
+              window.location.pathname = "/home";
+            }}
+          >
+            <i className="fas fa-sign-out"></i>
+            Logout
+          </div>
+        </div>
       </Menu>
     </React.Fragment>
   );

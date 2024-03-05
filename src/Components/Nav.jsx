@@ -4,15 +4,15 @@ import { useEffect, useState } from "react";
 import Axios from "../base/Axios";
 
 import Cookies from "universal-cookie";
+import { HIWORLD_COOKIE_NAME } from "../base/CookieName";
 
 let Nav = () => {
   let [user, setUser] = useState({});
   let cookie = new Cookies();
-  let id = cookie.get("hiworld-user-id");
+  let id = cookie.get(HIWORLD_COOKIE_NAME);
   useEffect(() => {
     Axios.get("/user/" + id).then((res) => {
-      setUser(res.data);
-      console.log(res.data);
+      setUser(res.data.user);
     });
   }, []);
   return (
@@ -31,10 +31,6 @@ let Nav = () => {
           Chat
         </NavLink>
 
-        <NavLink className="Link nav-link" to={"/create-post"}>
-          Create Post
-        </NavLink>
-
         <NavLink className="Link nav-link" to={"/about"}>
           About
         </NavLink>
@@ -42,7 +38,7 @@ let Nav = () => {
 
       <div className="nav-profile">
         {/* <div className="img-nav-profile"></div> */}
-        <AccountMenu firstLetter={"A"} user={user}></AccountMenu>
+        <AccountMenu user={user}></AccountMenu>
       </div>
     </nav>
   );

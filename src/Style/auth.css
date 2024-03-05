@@ -18,7 +18,8 @@
 .form-controle label {
   font-size: 1.1rem;
 }
-.form-controle input {
+.form-controle input,
+.form-controle select {
   padding: 5px 12px;
   transition: 0.5s;
   border-radius: 8px;
@@ -37,6 +38,8 @@
   border: solid #111111ac 1.5px;
   color: var(--Prcl);
 }
-.form-controle input:focus {
+/* .sing .form-controle input:focus,
+.sing .form-controle select:focus,
+.sing .form-controle textarea:focus {
   background-color: #e8f0fe;
-}
+} */

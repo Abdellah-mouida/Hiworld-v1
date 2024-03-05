@@ -46,7 +46,7 @@ button {
   cursor: pointer;
   border: none;
   transition: 0.5s;
-  align-self: flex-end;
+  /* align-self: flex-end; */
 }
 button:hover {
   opacity: 0.8;
@@ -54,12 +54,24 @@ button:hover {
 .btn-large {
   width: 100%;
 }
+.btn-des {
+  background-color: var(--low-white);
+  color: var(--low-black);
+}
 .f-end {
   display: flex;
   justify-content: end;
 }
 a {
   color: var(--Prcl);
+}
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: var(--low-white);
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+  background-color: var(--Prcl);
 }
 .error {
   color: #ff1100;
@@ -84,4 +96,20 @@ a {
 .img-c {
   background-position: center;
   background-size: cover;
+}
+
+/* React Material UI/UX */
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+  max-width: none !important;
+  max-height: none !important;
+  border-radius: 15px !important;
+  overflow: hidden !important;
+}
+.css-ja5taz-MuiTooltip-tooltip {
+  background-color: var(--Prcl) !important;
+  color: var(--low-white) !important;
+  padding: 10px 15px !important;
+  font-size: 0.8rem !important;
+  font-family: Poppins !important;
+  border-radius: 30px !important;
 }

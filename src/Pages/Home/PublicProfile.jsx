@@ -4,21 +4,24 @@ import Axios from "../../base/Axios";
 import Post from "../../Components/Post";
 import Cookies from "universal-cookie";
 import { HIWORLD_COOKIE_NAME } from "../../base/CookieName";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useParams } from "react-router-dom";
+import MyPosts from "./Profile/MyPost";
 
-let Profile = () => {
+let PublicProfile = () => {
   let [data, setData] = useState({});
   let cookie = new Cookies();
-  let id = cookie.get(HIWORLD_COOKIE_NAME);
+  let { serial_code } = useParams();
   let [fileChanged, setFileChanged] = useState(false);
   let inp = useRef(null);
+  let [render, setRender] = useState(false);
+  let id = new Cookies().get(HIWORLD_COOKIE_NAME);
   useEffect(() => {
-    Axios.get("/user/" + id)
+    Axios.get("/user/public/" + serial_code)
       .then((res) => {
         setData(res.data);
       })
       .catch((err) => console.log(err));
-  }, [fileChanged]);
+  }, [render]);
 
   // let handleChangeProfile = (e) => {
   //   let reader = new FileReader();
@@ -35,27 +38,64 @@ let Profile = () => {
   //     }
   //   });
   // };
-  let handleChangeProfile = async (e) => {
+
+  let handleDisLike = async (postId) => {
     try {
-      const reader = new FileReader();
-
-      reader.onload = async () => {
-        try {
-          let res = await Axios.post("/user/" + id + "/profile", {
-            profile: reader.result,
-          });
-          setFileChanged((prev) => !prev);
-        } catch (err) {
-          console.error("Error uploading file:", err);
-        }
-      };
-
-      reader.readAsDataURL(e.target.files[0]);
+      let res = await Axios.delete(
+        "/posts/likes/" + postId + "/" + data?.user?._id
+      );
+      setRender((p) => !p);
+      console.log(res);
     } catch (err) {
-      console.error("Error reading file:", err);
+      console.log(err);
     }
   };
-
+  let handleLike = async (postId) => {
+    console.log("Hello");
+    try {
+      let res = await Axios.put("/posts/likes/" + postId + "/" + id);
+      setRender((p) => !p);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  let handleAddToSaved = async (postId) => {
+    try {
+      let res = await Axios.post("/posts/saved/" + id + "/" + postId);
+      setRender((p) => !p);
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  let handleRemoveFromSaved = async (postId) => {
+    try {
+      let res = await Axios.delete("/posts/saved/" + id + "/" + postId);
+      setRender((p) => !p);
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  // Follow
+  let follow = async (userId) => {
+    try {
+      let res = await Axios.post("/user/" + id + "/following/" + userId);
+      setRender((p) => !p);
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  let unfollow = async (userId) => {
+    try {
+      let res = await Axios.delete("/user/" + id + "/following/" + userId);
+      setRender((p) => !p);
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <div className="container">
       <div className="profile" style={{ marginTop: "2rem" }}>
@@ -63,7 +103,7 @@ let Profile = () => {
           {/* <div className="profile-img img-c">
             <i className="fas fa-pen"></i>
           </div> */}
-          <input type="file" hidden ref={inp} onChange={handleChangeProfile} />
+
           {data.user?.profile ? (
             <Avatar
               sx={{
@@ -76,9 +116,7 @@ let Profile = () => {
                 overflow: "visible",
               }}
               className="profile-img"
-            >
-              <i className="fas fa-pen" onClick={() => inp.current.click()}></i>
-            </Avatar>
+            ></Avatar>
           ) : (
             <Avatar
               sx={{
@@ -90,14 +128,24 @@ let Profile = () => {
               }}
               className="profile-img"
             >
-              <i className="fas fa-pen" onClick={() => inp.current.click()}></i>
-
               {data.user?.name && data.user.name[0]}
             </Avatar>
           )}
           <div className="user-info">
-            <h4>{data?.user?.name} </h4>
-            <p>Jan Sun 25 2024</p>
+            <div className="name-section">
+              <h4>{data?.user?.name}</h4>
+              {data?.user?.followers?.includes(id) ? (
+                <button
+                  className="btn-des"
+                  onClick={() => unfollow(data?.user?._id)}
+                >
+                  Unfollow
+                </button>
+              ) : (
+                <button onClick={() => follow(data?.user?._id)}>Follow</button>
+              )}{" "}
+            </div>
+            <p>{new Date(data?.user?.createdAt).toDateString()}</p>
           </div>
         </header>
         <div className="follows">
@@ -159,29 +207,31 @@ let Profile = () => {
           </div>
         )}
 
-        <div
-          className="navigation"
-          style={{
-            width: "100%",
-            margin: "2rem",
-          }}
-        >
-          <NavLink className="Link nav-link" to={"myPost"}>
-            My Post
-          </NavLink>
-          <NavLink className="Link nav-link" to={"saved"}>
-            Saved Post
-          </NavLink>
-
-          <NavLink className="Link nav-link" to={"add-info"}>
-            Add More Info
-          </NavLink>
-        </div>
         <div className="posts" style={{ margin: "2rem 0" }}>
-          <Outlet></Outlet>
+          {data?.user?.posts.map((m, i) => (
+            <Post
+              showBtn
+              key={i}
+              id={m._id}
+              user={m.user}
+              createdAt={m.createdAt}
+              image={m.image}
+              currentUser={id}
+              howLikeIt={m.howLikeIt}
+              description={m.description}
+              likes={m.likes}
+              saver={m.saver}
+              Like={handleLike}
+              DisLike={handleDisLike}
+              handleAddToSaved={handleAddToSaved}
+              handleRemoveFromSaved={handleRemoveFromSaved}
+              // follow={follow}
+              // unfollow={unfollow}
+            ></Post>
+          ))}
         </div>
       </div>
     </div>
   );
 };
-export default Profile;
+export default PublicProfile;

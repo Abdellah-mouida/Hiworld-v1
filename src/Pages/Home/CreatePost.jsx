@@ -22,11 +22,12 @@ import Cookies from "universal-cookie";
 import Axios from "../../base/Axios";
 import Error from "../../Material UI/Error";
 import { useNavigate } from "react-router-dom";
+import { HIWORLD_COOKIE_NAME } from "../../base/CookieName";
 
 // Register the plugins
 let CreatePost = () => {
   let cookie = new Cookies();
-  let id = cookie.get("hiworld-user-id");
+  let id = cookie.get(HIWORLD_COOKIE_NAME);
   let nav = useNavigate();
   let [err, setErr] = useState("");
 

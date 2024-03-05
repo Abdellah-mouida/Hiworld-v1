@@ -2,6 +2,7 @@ import Cookies from "universal-cookie";
 import Axios from "../../base/Axios";
 import { useState } from "react";
 import Error from "../../Material UI/Error";
+import { HIWORLD_COOKIE_NAME } from "../../base/CookieName";
 let Sing = () => {
   let [err, setErr] = useState("");
   let cookie = new Cookies();
@@ -22,7 +23,7 @@ let Sing = () => {
       try {
         let res = await Axios.post("/sing", form);
         let userId = res.data.user._id;
-        cookie.set("hiworld-user-id", userId);
+        cookie.set(HIWORLD_COOKIE_NAME, userId);
         setErr("");
         window.location.pathname = "/home";
         console.log(res);
@@ -45,6 +46,7 @@ let Sing = () => {
         <div className="form-controle">
           <label htmlFor="">Username</label>
           <input
+            autoFocus
             type="text"
             name="name"
             placeholder="Username ..."

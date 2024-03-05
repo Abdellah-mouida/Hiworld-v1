@@ -41,3 +41,120 @@
   align-items: center;
   gap: 30px;
 }
+.follows {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  margin: 3rem 0;
+}
+.follows .box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+.follows .box h4 {
+  font-size: 3.5vmin;
+}
+.follows .box p {
+  font-size: 7vmin;
+  font-weight: 600;
+}
+.profile .navigation {
+  justify-content: center;
+}
+.more-info {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+.more-info .form-controle {
+  gap: 15px;
+}
+.more-info textarea {
+  height: 300px;
+}
+.more-info input,
+.more-info select,
+.more-info textarea {
+  font-size: 1rem;
+  padding: 10px 15px;
+  box-shadow: 0 0 12px 2px #0033ff44;
+  border: none;
+  color: var(--low-black);
+  border-radius: 20px;
+}
+
+.profile-more-info {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 25px;
+}
+.profile-more-info .card {
+  display: flex;
+  padding: 1.3rem;
+  border-radius: 15px;
+  box-shadow: 0 0 12px 3px #0033ff33;
+  transition: 0.5s;
+  flex-direction: column;
+  cursor: pointer;
+  align-items: center;
+
+  border: solid transparent 2px;
+  gap: 20px;
+}
+.profile-more-info .card:hover {
+  border: solid var(--Prcl) 2px;
+  box-shadow: 0 0 22px 5px #0033ff33;
+}
+.profile-more-info .card b {
+  color: var(--Prcl);
+
+  font-size: 3rem;
+}
+.profile-more-info .card h4 {
+  font-size: 1.2rem;
+}
+.profile-more-info .card p {
+  color: var(--Prcl);
+  font-size: 1.5rem;
+}
+/* .profile-more-info .card:last-child {
+  grid-column: span 2;
+} */
+.bio {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 1rem;
+  margin: 2rem 0;
+}
+.bio h3 {
+  font-size: 1.5rem;
+}
+.bio p {
+  padding: 1rem;
+  font-size: 1.1rem;
+  background-color: #eeeeee66;
+  border-radius: 10px;
+  line-height: 2;
+}
+.user-info .name-section {
+  /* background-color: red; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.user-info .name-section button {
+  margin: 0;
+}
+/* .more-info .form-controle input:not(:placeholder-shown),
+.more-info .form-controle select:not(:placeholder-shown),
+.more-info .form-controle textarea:not(:placeholder-shown) {
+  background-color: #e8f0fe;
+} */

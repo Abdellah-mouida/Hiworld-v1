@@ -66,3 +66,25 @@ nav {
 .nav-link:hover::after {
   width: 80%;
 }
+.menu-item {
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  gap: 20px;
+  padding: 0.8rem 1rem;
+  transition: 0.5s;
+
+  cursor: pointer;
+}
+.menu-item i {
+  font-size: 1.1rem;
+}
+.menu-item:hover {
+  background-color: #0033ff22;
+}
+.menu-container {
+  transition: 0.5s;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
