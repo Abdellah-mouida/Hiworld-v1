@@ -1,5 +1,4 @@
 let Message = (props) => {
-  console.log(props);
   return (
     <div className="message">
       <div

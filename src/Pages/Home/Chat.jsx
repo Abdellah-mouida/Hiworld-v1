@@ -9,14 +9,27 @@ let Chat = (props) => {
   let [msg, setMsg] = useState("");
   let [chats, setChats] = useState([]);
   let [render, setReneder] = useState(false);
-  let scroller = useRef(null);
-  let messageContainer = document.getElementById("messages-container");
+  let messageContainer = useRef(null);
+
+  if (messageContainer?.current) {
+    messageContainer.current.scrollTo({
+      top: messageContainer.current.scrollHeight + 100,
+      behavior: "smooth",
+    });
+  }
 
   useEffect(() => {
     Axios.get("/" + props.path)
       .then((res) => {
         setChats(res.data);
-        messageContainer.scrollTo(0, messageContainer.scrollHeight);
+        setTimeout(() => {
+          if (messageContainer?.current) {
+            messageContainer.current.scrollTo({
+              top: messageContainer.current.scrollHeight + 100000,
+              behavior: "smooth",
+            });
+          }
+        }, 0);
       })
       .catch((err) => console.log(err));
   }, [render]);
@@ -33,12 +46,15 @@ let Chat = (props) => {
       console.log(err);
     }
   };
+  // useEffect(() => {
+  //   setShouldScroll((p) => p);
+  // }, [render]);
 
   return (
     <div className="container chat">
       {props?.data && <div className="f-center"></div>}
       <h2>Chat</h2>
-      <div className="messages" id="messages-container">
+      <div className="messages" id="messages-container" ref={messageContainer}>
         {chats?.map((m, i) =>
           m?.user?._id === id ? (
             <MessageRev
