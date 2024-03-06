@@ -30,6 +30,7 @@ let CreatePost = () => {
   let id = cookie.get(HIWORLD_COOKIE_NAME);
   let nav = useNavigate();
   let [err, setErr] = useState("");
+  let [loading, setLoading] = useState(false);
 
   registerPlugin(
     FilePondPluginFileEncode,
@@ -44,13 +45,16 @@ let CreatePost = () => {
   });
 
   let handelCreatePost = async (e) => {
+    setLoading(true);
     e.preventDefault();
     try {
       let res = await Axios.post("/posts", form);
+      setLoading(false);
       // window.location.pathname = "/home";
       nav("/home");
       console.log(res);
     } catch (err) {
+      setLoading(false);
       if (err.response.status === 400) {
         setErr(err.response.data);
       } else {
@@ -95,7 +99,14 @@ let CreatePost = () => {
         />
         {err && <Error err={err}></Error>}
         <div style={{ margin: "0.5rem" }} className="f-end">
-          <button onClick={handelCreatePost}>Create</button>
+          {loading ? (
+            <button style={{ width: "130px" }} className="loading-btn">
+              {" "}
+              <div className="spener"></div>
+            </button>
+          ) : (
+            <button onClick={handelCreatePost}>Create</button>
+          )}
         </div>
       </div>
     </div>

@@ -4,28 +4,32 @@ import MessageRev from "../../Components/Message rev";
 import Axios from "../../base/Axios";
 import Cookies from "universal-cookie";
 import { HIWORLD_COOKIE_NAME } from "../../base/CookieName";
+import Loading from "../../Components/Loading/Loading";
 
 let Chat = (props) => {
   let [msg, setMsg] = useState("");
   let [chats, setChats] = useState([]);
   let [render, setReneder] = useState(false);
   let messageContainer = useRef(null);
+  let [loading, setLoading] = useState(false);
 
-  if (messageContainer?.current) {
-    messageContainer.current.scrollTo({
-      top: messageContainer.current.scrollHeight + 100,
-      behavior: "smooth",
-    });
-  }
+  // if (messageContainer?.current) {
+  //   messageContainer.current.scrollTo({
+  //     top: messageContainer.current.scrollHeight + 100,
+  //     behavior: "smooth",
+  //   });
+  // }
 
   useEffect(() => {
+    setLoading(true);
     Axios.get("/" + props.path)
       .then((res) => {
         setChats(res.data);
+        setLoading(false);
         setTimeout(() => {
           if (messageContainer?.current) {
             messageContainer.current.scrollTo({
-              top: messageContainer.current.scrollHeight + 100000,
+              top: messageContainer.current.scrollHeight + 1000,
               behavior: "smooth",
             });
           }
@@ -51,40 +55,47 @@ let Chat = (props) => {
   // }, [render]);
 
   return (
-    <div className="container chat">
-      {props?.data && <div className="f-center"></div>}
-      <h2>Chat</h2>
-      <div className="messages" id="messages-container" ref={messageContainer}>
-        {chats?.map((m, i) =>
-          m?.user?._id === id ? (
-            <MessageRev
-              user={m.user}
-              message={m.message}
-              key={i}
-              createdAt={m.createdAt}
-            ></MessageRev>
-          ) : (
-            <Message
-              user={m.user}
-              message={m.message}
-              key={i}
-              createdAt={m.createdAt}
-            ></Message>
-          )
-        )}
+    <>
+      {loading && <Loading></Loading>}
+      <div className="container chat">
+        {props?.data && <div className="f-center"></div>}
+        <h2>Chat</h2>
+        <div
+          className="messages"
+          id="messages-container"
+          ref={messageContainer}
+        >
+          {chats?.map((m, i) =>
+            m?.user?._id === id ? (
+              <MessageRev
+                user={m.user}
+                message={m.message}
+                key={i}
+                createdAt={m.createdAt}
+              ></MessageRev>
+            ) : (
+              <Message
+                user={m.user}
+                message={m.message}
+                key={i}
+                createdAt={m.createdAt}
+              ></Message>
+            )
+          )}
+        </div>
+        <div className="create-msg">
+          <input
+            type="text"
+            value={msg}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") send();
+            }}
+            onChange={(e) => setMsg(e.target.value)}
+          />
+          <i onClick={send} className="fas fa-paper-plane"></i>
+        </div>
       </div>
-      <div className="create-msg">
-        <input
-          type="text"
-          value={msg}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") send();
-          }}
-          onChange={(e) => setMsg(e.target.value)}
-        />
-        <i onClick={send} className="fas fa-paper-plane"></i>
-      </div>
-    </div>
+    </>
   );
 };
 export default Chat;

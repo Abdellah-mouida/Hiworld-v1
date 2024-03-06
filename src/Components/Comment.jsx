@@ -6,18 +6,25 @@ import Axios from "../base/Axios";
 import Cookies from "universal-cookie";
 import { HIWORLD_COOKIE_NAME } from "../base/CookieName";
 import CommentElementREV from "./CommentElementREV";
+import { Close } from "@mui/icons-material";
+import Loading from "./Loading/Loading";
 
 let Comment = (props) => {
   let [comments, setComments] = React.useState([]);
   const [open, setOpen] = React.useState(false);
   let id = new Cookies().get(HIWORLD_COOKIE_NAME);
   let [render, setRender] = React.useState(false);
+  let [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
     Axios.get("/comments/" + props.postId)
-      .then((res) => setComments(res.data))
-      .catch((err) => console.log(err));
-  });
+      .then((res) => {
+        setComments(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [render]);
 
   const handleClickOpen = async () => {
     // try {
@@ -52,10 +59,12 @@ let Comment = (props) => {
 
   return (
     <React.Fragment>
-      <p onClick={handleClickOpen}>
-        <i className="fa-regular fa-comment"></i>
-        Comments
-      </p>
+      {
+        <p onClick={handleClickOpen}>
+          <i className="fa-regular fa-comment"></i>
+          Comments
+        </p>
+      }
       <Dialog
         open={open}
         onClose={handleClose}
@@ -69,6 +78,7 @@ let Comment = (props) => {
             <i className="fas fa-paper-plane"></i>{" "}
           </button>
           <h2>Comments</h2>
+
           <div className="comments">
             {comments?.map((m, i) =>
               m?.user?._id === id ? (

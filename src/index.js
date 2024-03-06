@@ -16,6 +16,9 @@ import "./Style/post.css";
 import "./Style/profile.css";
 import "./Style/comment.css";
 import "./Style/message.css";
+import "./Style/loading.css";
+import "./Style/skelton.css";
+import "./Style/about.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

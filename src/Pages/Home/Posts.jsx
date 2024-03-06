@@ -4,14 +4,23 @@ import Post from "../../Components/Post";
 import Cookies from "universal-cookie";
 import { HIWORLD_COOKIE_NAME } from "../../base/CookieName";
 import AlertDialog from "../../Material UI/Dialoge";
+import Loading from "../../Components/Loading/Loading";
+import ProfileSkeleton from "../../Components/Skileton/ProfileSkeleton";
+import PostSkilton from "../../Components/Skileton/PostSkilton";
 
 let Posts = () => {
   let [data, setData] = useState([]);
   let cookie = new Cookies();
   let id = cookie.get(HIWORLD_COOKIE_NAME);
   let [render, setRender] = useState(false);
+  let [loading, setLoading] = useState(false);
+
   useEffect(() => {
-    Axios.get("/posts").then((res) => setData(res.data));
+    setLoading(true);
+    Axios.get("/posts").then((res) => {
+      setData(res.data);
+      setLoading(false);
+    });
   }, []);
 
   let handleLike = async (postId) => {
@@ -139,27 +148,37 @@ let Posts = () => {
 
   return (
     <div className="container">
-      <h2>Posts</h2>{" "}
-      {data.map((m, i) => (
-        <Post
-          key={i}
-          id={m._id}
-          user={m.user}
-          createdAt={m.createdAt}
-          image={m.image}
-          currentUser={id}
-          howLikeIt={m.howLikeIt}
-          description={m.description}
-          likes={m.likes}
-          Like={handleLike}
-          saver={m.saver}
-          DisLike={handleDisLike}
-          handleAddToSaved={handleAddToSaved}
-          handleRemoveFromSaved={handleRemoveFromSaved}
-          follow={follow}
-          unfollow={unfollow}
-        ></Post>
-      ))}
+      <h2>Posts</h2>
+      {/* {loading && <Loading></Loading>} */}
+      {!loading ? (
+        data.map((m, i) => (
+          <Post
+            key={i}
+            id={m._id}
+            user={m.user}
+            createdAt={m.createdAt}
+            image={m.image}
+            currentUser={id}
+            howLikeIt={m.howLikeIt}
+            description={m.description}
+            likes={m.likes}
+            Like={handleLike}
+            saver={m.saver}
+            DisLike={handleDisLike}
+            handleAddToSaved={handleAddToSaved}
+            handleRemoveFromSaved={handleRemoveFromSaved}
+            follow={follow}
+            unfollow={unfollow}
+          ></Post>
+        ))
+      ) : (
+        <>
+          <PostSkilton></PostSkilton>
+          <PostSkilton></PostSkilton>
+          <PostSkilton></PostSkilton>
+          <PostSkilton></PostSkilton>
+        </>
+      )}
     </div>
   );
 };

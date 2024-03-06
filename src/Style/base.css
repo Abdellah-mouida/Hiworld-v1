@@ -10,7 +10,10 @@
   --low-white: #eee;
   --low-black: #111;
 }
-
+.App,
+.home {
+  overflow: hidden;
+}
 .f-center {
   display: flex;
   align-items: center;
@@ -66,11 +69,12 @@ a {
   color: var(--Prcl);
 }
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 6px;
   background-color: var(--low-white);
 }
+
 ::-webkit-scrollbar-thumb {
-  border-radius: 50px;
+  border-radius: 20px;
   background-color: var(--Prcl);
 }
 .error {

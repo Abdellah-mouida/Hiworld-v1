@@ -20,6 +20,7 @@ import ChatRoomPassword from "./Pages/Home/ChatRoomPassword";
 import PublicProfile from "./Pages/Home/PublicProfile";
 import Cookies from "universal-cookie";
 import { HIWORLD_COOKIE_NAME } from "./base/CookieName";
+import About from "./Pages/Home/About";
 let App = () => {
   return (
     <div className="App">
@@ -65,6 +66,7 @@ let App = () => {
               path="/create-post"
               element={<CreatePost></CreatePost>}
             ></Route>
+            <Route path="/about" element={<About></About>}></Route>
           </Route>
         </Route>
       </Routes>

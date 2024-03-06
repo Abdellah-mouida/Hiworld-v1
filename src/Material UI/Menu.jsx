@@ -168,18 +168,24 @@ export default function AccountMenu(props) {
               Create Post
             </div>
           </Link>
-          <div className="menu-item">
-            <i className="fas fa-comments"></i>
-            Chate
-          </div>
-          <div className="menu-item">
-            <i className="fas fa-bookmark"></i>
-            Saved
-          </div>
-          <div className="menu-item">
-            <i className="fas fa-info-circle"></i>
-            About us
-          </div>
+          <Link className="Link" to={"/chat"}>
+            <div className="menu-item">
+              <i className="fas fa-comments"></i>
+              Chate
+            </div>
+          </Link>
+          <Link className="Link" to={"/profile/saved"}>
+            <div className="menu-item">
+              <i className="fas fa-bookmark"></i>
+              Saved
+            </div>
+          </Link>
+          <Link className="Link" to={"/about"}>
+            <div className="menu-item">
+              <i className="fas fa-info-circle"></i>
+              About us
+            </div>
+          </Link>
           <div
             className="menu-item"
             onClick={() => {

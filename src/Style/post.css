@@ -87,7 +87,8 @@
   justify-content: center;
   color: var(--low-white);
 
-  width: 60px;
+  min-width: 60px;
+
   font-size: 2rem;
   height: 60px;
   border-radius: 50%;

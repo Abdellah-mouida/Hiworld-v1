@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import Axios from "../../../base/Axios";
 import Cookies from "universal-cookie";
 import { HIWORLD_COOKIE_NAME } from "../../../base/CookieName";
+import SelectLabels from "../../../Material UI/Select";
 
 let MoreInfo = () => {
   let id = new Cookies().get(HIWORLD_COOKIE_NAME);
+  let [loading, setLoading] = useState(false);
   let [form, setForm] = useState({
     gender: "",
     phoneNumber: "",
@@ -19,9 +21,11 @@ let MoreInfo = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
   let save = async () => {
+    setLoading(true);
     try {
       let res = await Axios.post("/user/" + id + "/more-info", form);
       window.location.pathname = "/profile/myPost";
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }
@@ -78,7 +82,14 @@ let MoreInfo = () => {
         ></textarea>
       </div>
       <div className="f-end">
-        <button onClick={save}>Save</button>
+        {loading ? (
+          <button style={{ width: "130px" }} className="loading-btn">
+            {" "}
+            <div className="spener"></div>
+          </button>
+        ) : (
+          <button onClick={save}>Save</button>
+        )}
       </div>
     </div>
   );

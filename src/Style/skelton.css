@@ -1,0 +1,31 @@
+:root {
+  --skelton: #0033ff44;
+}
+
+.skelton h4,
+.skelton p {
+  background-color: var(--skelton);
+  height: 20px;
+  border-radius: 15px;
+}
+.skelton h4 {
+  width: 100px;
+}
+.skelton p {
+  width: 150px;
+}
+/* .skelton div {
+  background-color: var(--skelton);
+} */
+.skelton .post-info {
+  gap: 10px;
+}
+.skelton .post-desc {
+  width: 100%;
+}
+.skelton .post-profile {
+  background-color: var(--skelton);
+}
+.skelton .post-img {
+  background-color: var(--skelton);
+}
