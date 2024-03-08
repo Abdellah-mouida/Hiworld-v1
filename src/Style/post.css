@@ -88,9 +88,9 @@
   color: var(--low-white);
 
   min-width: 60px;
+  height: 60px;
 
   font-size: 2rem;
-  height: 60px;
   border-radius: 50%;
 }
 /* .comment-dialoge {

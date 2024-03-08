@@ -3,17 +3,20 @@ import Axios from "../../../base/Axios";
 import Post from "../../../Components/Post";
 import Cookies from "universal-cookie";
 import { HIWORLD_COOKIE_NAME } from "../../../base/CookieName";
+import PostSkilton from "../../../Components/Skileton/PostSkilton";
 
 let Saved = (props) => {
   let cookie = new Cookies();
   let id = cookie.get(HIWORLD_COOKIE_NAME);
   let [data, setData] = useState([]);
-
+  let [loading, setLoading] = useState(false);
   let [render, setRender] = useState(false);
   useEffect(() => {
+    setLoading(true);
     Axios.get("/user/" + id + "/saved")
       .then((res) => {
         setData(res.data);
+        setLoading(false);
       })
       .catch((err) => console.log(err));
   }, [render]);
@@ -95,6 +98,13 @@ let Saved = (props) => {
           unfollow={unfollow}
         ></Post>
       ))}
+      {loading && (
+        <>
+          {" "}
+          <PostSkilton></PostSkilton> <PostSkilton></PostSkilton>{" "}
+          <PostSkilton></PostSkilton>{" "}
+        </>
+      )}
     </>
   );
 };

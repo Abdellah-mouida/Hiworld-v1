@@ -14,7 +14,7 @@
 }
 
 .comment-user-img {
-  width: 40px;
+  min-width: 40px;
   height: 40px;
   background-color: var(--Prcl);
   border-radius: 50%;
@@ -46,7 +46,6 @@
 .comment {
   display: flex;
   flex-direction: column;
-
   gap: 10px;
   padding: 0.7rem 0.9rem;
   border-radius: 8px;

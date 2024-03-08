@@ -14,7 +14,7 @@ let Post = (props) => {
             to={
               props?.user?._id !== props?.currentUser
                 ? "/profile/user/" + props?.user?.SERIAL_CODE
-                : "/profile"
+                : "/profile/myPost"
             }
             className="post-profile"
             style={{
@@ -75,12 +75,12 @@ let Post = (props) => {
         {props?.howLikeIt?.find((user) => user === props.currentUser) ? (
           <p onClick={() => props.DisLike(props?.id)}>
             <i className="fas fa-thumbs-up"></i>
-            Likes ({props?.howLikeIt?.length})
+            <span>Likes </span>({props?.howLikeIt?.length})
           </p>
         ) : (
           <p onClick={() => props.Like(props?.id)}>
             <i className="fa-regular fa-thumbs-up"></i>
-            Likes ({props?.howLikeIt?.length})
+            <span>Likes </span>({props?.howLikeIt?.length})
           </p>
         )}
         {/* <p onClick={() => setOpen((p) => !p)}>
@@ -95,12 +95,12 @@ let Post = (props) => {
         </dialog> */}
         {props?.saver?.includes(props.currentUser) ? (
           <p onClick={() => props?.handleRemoveFromSaved(props?.id)}>
-            <i className="fas fa-bookmark"></i> Saved
+            <i className="fas fa-bookmark"></i> <span>Saved</span>
           </p>
         ) : (
           <p onClick={() => props?.handleAddToSaved(props?.id)}>
             <i className="fa-regular fa-bookmark"></i>
-            Add to Saved
+            <span>Add to Saved</span>
           </p>
         )}
       </div>

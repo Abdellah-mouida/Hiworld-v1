@@ -62,7 +62,7 @@ let Comment = (props) => {
       {
         <p onClick={handleClickOpen}>
           <i className="fa-regular fa-comment"></i>
-          Comments
+          <span>Comments</span>
         </p>
       }
       <Dialog

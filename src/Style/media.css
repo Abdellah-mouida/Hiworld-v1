@@ -1,0 +1,103 @@
+@media (max-width: 700px) {
+  html {
+    font-size: 13px;
+  }
+  .post-action span {
+    display: none;
+  }
+  .post-profile {
+    min-width: 45px;
+    height: 45px;
+  }
+  .container h2 {
+    margin: 15px 0 25px;
+  }
+  .profile-more-info {
+    scale: 0.8;
+    grid-template-columns: 1fr;
+  }
+  nav .navigation {
+    display: none;
+  }
+  nav {
+    grid-template-columns: 3fr 1fr;
+  }
+  .dialog-container {
+    width: 80vw;
+    height: 550px;
+    margin: 0 auto;
+  }
+  .css-hz1bth-MuiDialog-container {
+    height: 100%;
+    outline: none !important;
+
+    display: block !important;
+  }
+  .dialog-container {
+    font-size: 10px;
+  }
+  .comment {
+    padding: 0.6rem 0.2rem;
+  }
+  .comment-content {
+    padding: 0.6rem 0.4rem;
+  }
+  .comment h3 {
+    font-size: 0.8rem;
+  }
+  .comment-user-img {
+    min-width: 35px;
+    height: 35px;
+  }
+  .comments {
+    padding: 0.7rem;
+  }
+  .create-comment textarea {
+    border-top: solid var(--low-black) 1.5px;
+  }
+  .create-comment {
+    box-shadow: none;
+  }
+  .msg-img {
+    min-width: 40px;
+    height: 40px;
+  }
+  .msg-content {
+    max-width: 90%;
+    border-radius: 15px;
+  }
+  .chat {
+    padding-top: 1rem;
+  }
+  .chat h2 {
+    margin: 10px;
+  }
+  .profile .navigation {
+    margin: 1rem;
+  }
+  .profile .navigation .nav-link {
+    padding: 1rem;
+  }
+  .skelton .box h4 {
+    width: 50px;
+  }
+  .skelton .box p {
+    width: 100px;
+  }
+  .more-info {
+    padding: 0.5rem;
+  }
+  .sm-screen {
+    display: block;
+  }
+}
+
+@media (max-width: 1000px) {
+  .container {
+    width: 97%;
+  }
+
+  .post {
+    width: 95%;
+  }
+}

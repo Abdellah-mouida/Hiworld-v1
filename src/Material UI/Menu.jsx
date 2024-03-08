@@ -162,16 +162,24 @@ export default function AccountMenu(props) {
         {/* Additional Menu Items */}
 
         <div className="menu-container">
+          <div className="sm-screen">
+            <Link className="Link" to={"/home"}>
+              <div className="menu-item">
+                <i className="fas fa-home"></i>
+                Home
+              </div>
+            </Link>
+            <Link className="Link" to={"/chat"}>
+              <div className="menu-item">
+                <i className="fas fa-comments"></i>
+                Chate
+              </div>
+            </Link>
+          </div>
           <Link className="Link" to={"/create-post"}>
             <div className="menu-item">
               <i className="fas fa-plus"></i>
               Create Post
-            </div>
-          </Link>
-          <Link className="Link" to={"/chat"}>
-            <div className="menu-item">
-              <i className="fas fa-comments"></i>
-              Chate
             </div>
           </Link>
           <Link className="Link" to={"/profile/saved"}>
@@ -190,7 +198,9 @@ export default function AccountMenu(props) {
             className="menu-item"
             onClick={() => {
               new Cookies().remove(HIWORLD_COOKIE_NAME);
-              window.location.pathname = "/home";
+              setTimeout(() => {
+                window.location.pathname = "/home";
+              }, 2);
             }}
           >
             <i className="fas fa-sign-out"></i>

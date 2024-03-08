@@ -142,6 +142,7 @@ let Profile = () => {
               <p> {data?.user?.following?.length} </p>
             </div>
           </div>
+
           <div className="profile-more-info">
             {data?.user?.gender && (
               <div className="card">
@@ -208,7 +209,6 @@ let Profile = () => {
             className="navigation"
             style={{
               width: "100%",
-              margin: "2rem",
             }}
           >
             <NavLink className="Link nav-link" to={"myPost"}>

@@ -21,11 +21,13 @@ import PublicProfile from "./Pages/Home/PublicProfile";
 import Cookies from "universal-cookie";
 import { HIWORLD_COOKIE_NAME } from "./base/CookieName";
 import About from "./Pages/Home/About";
+import NotFound from "./Error/404";
 let App = () => {
   return (
     <div className="App">
       <Routes>
         {/* <Route path="/home/*" element={<LosePage></LosePage>}></Route> */}
+        <Route path="*" element={<NotFound></NotFound>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/sing" element={<Sing></Sing>}></Route>
         <Route element={<RequireAuth></RequireAuth>}>

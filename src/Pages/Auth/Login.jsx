@@ -26,8 +26,8 @@ let Login = () => {
         window.location.pathname = "/home";
         console.log(res);
       } catch (err) {
-        if (err.response.status !== 201) {
-          setErr(err.response.data);
+        if (err?.response?.status !== 201) {
+          setErr(err?.response?.data);
         }
       }
     }

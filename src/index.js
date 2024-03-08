@@ -19,6 +19,7 @@ import "./Style/message.css";
 import "./Style/loading.css";
 import "./Style/skelton.css";
 import "./Style/about.css";
+import "./Style/media.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

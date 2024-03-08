@@ -96,12 +96,15 @@ a {
 }
 .home {
   padding-top: 60px;
+  width: 100%;
 }
 .img-c {
   background-position: center;
   background-size: cover;
 }
-
+.sm-screen {
+  display: none;
+}
 /* React Material UI/UX */
 .css-1t1j96h-MuiPaper-root-MuiDialog-paper {
   max-width: none !important;
@@ -109,6 +112,7 @@ a {
   border-radius: 15px !important;
   overflow: hidden !important;
 }
+
 .css-ja5taz-MuiTooltip-tooltip {
   background-color: var(--Prcl) !important;
   color: var(--low-white) !important;
