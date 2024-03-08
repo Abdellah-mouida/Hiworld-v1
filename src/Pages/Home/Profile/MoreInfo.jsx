@@ -3,6 +3,8 @@ import Axios from "../../../base/Axios";
 import Cookies from "universal-cookie";
 import { HIWORLD_COOKIE_NAME } from "../../../base/CookieName";
 import SelectLabels from "../../../Material UI/Select";
+import CountrySelect from "../../../Components/CountrySeletct";
+import { Countries } from "../../../base/Country";
 
 let MoreInfo = () => {
   let id = new Cookies().get(HIWORLD_COOKIE_NAME);
@@ -14,6 +16,11 @@ let MoreInfo = () => {
     country: "",
     bio: "",
   });
+  let countryOptions = Countries.map((country) => (
+    <option key={country.name} value={country.name}>
+      {country.name}
+    </option>
+  ));
   useEffect(() => {
     Axios.get("/user/" + id + "/more-info").then((res) => setForm(res.data));
   }, []);
@@ -64,14 +71,15 @@ let MoreInfo = () => {
       </div>
       <div className="form-controle">
         <label htmlFor="">Country</label>
-        <input
-          onChange={changeForm}
-          value={form.country}
-          type="text"
-          name="country"
-          placeholder="Where Are You Now ?"
-        ></input>
+
+        <select name="country" onChange={changeForm} value={form.country}>
+          <option value="" disabled selected>
+            Where Do You Live ?
+          </option>
+          {countryOptions}
+        </select>
       </div>
+
       <div className="form-controle">
         <label htmlFor="">Bio</label>
         <textarea

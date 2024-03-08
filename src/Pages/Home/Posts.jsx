@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Axios from "../../base/Axios";
 import Post from "../../Components/Post";
 import Cookies from "universal-cookie";
@@ -14,13 +14,48 @@ let Posts = () => {
   let id = cookie.get(HIWORLD_COOKIE_NAME);
   let [render, setRender] = useState(false);
   let [loading, setLoading] = useState(false);
+  let [totalLength, setTotalLength] = useState(0);
+  let [page, setPage] = useState(1);
+
+  let observator = useRef();
+  let lastPostElement = useCallback(
+    (node) => {
+      if (loading || data?.length === totalLength) return;
+      if (observator.current) observator.current.disconnect();
+      observator.current = new IntersectionObserver((entries) => {
+        if (entries[0]?.isIntersecting) {
+          setPage((prev) => prev + 1);
+          console.log("add");
+        }
+      });
+      if (node) observator.current.observe(node);
+    },
+    [loading]
+  );
 
   useEffect(() => {
     setLoading(true);
-    Axios.get("/posts").then((res) => {
-      setData(res.data);
+    Axios.get("/posts?page=" + page).then((res) => {
+      let IDMap = new Map();
+      setData(
+        (prev) => {
+          if (prev) {
+            [...prev, ...res.data].forEach((post) => IDMap.set(post._id, post));
+            return Array.from(IDMap.values());
+          } else {
+            return res.data;
+          }
+        }
+        // prev ? [...new Set([...prev, ...res.data])] : res.data
+      );
       setLoading(false);
     });
+  }, [page]);
+
+  useEffect(() => {
+    Axios.get("/posts/totalLength")
+      .then((res) => setTotalLength(res.data?.count))
+      .catch((err) => console.log(err));
   }, []);
 
   let handleLike = async (postId) => {
@@ -150,9 +185,10 @@ let Posts = () => {
     <div className="container">
       <h2>Posts</h2>
       {/* {loading && <Loading></Loading>} */}
-      {!loading ? (
-        data.map((m, i) => (
+      {data?.map((m, i) =>
+        data?.length === i + 1 ? (
           <Post
+            postRef={lastPostElement}
             key={i}
             id={m._id}
             user={m.user}
@@ -170,8 +206,29 @@ let Posts = () => {
             follow={follow}
             unfollow={unfollow}
           ></Post>
-        ))
-      ) : (
+        ) : (
+          <Post
+            // postRef={lastPostElement}
+            key={i}
+            id={m._id}
+            user={m.user}
+            createdAt={m.createdAt}
+            image={m.image}
+            currentUser={id}
+            howLikeIt={m.howLikeIt}
+            description={m.description}
+            likes={m.likes}
+            Like={handleLike}
+            saver={m.saver}
+            DisLike={handleDisLike}
+            handleAddToSaved={handleAddToSaved}
+            handleRemoveFromSaved={handleRemoveFromSaved}
+            follow={follow}
+            unfollow={unfollow}
+          ></Post>
+        )
+      )}
+      {loading && (
         <>
           <PostSkilton></PostSkilton>
           <PostSkilton></PostSkilton>

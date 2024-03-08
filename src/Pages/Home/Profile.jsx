@@ -6,6 +6,7 @@ import Cookies from "universal-cookie";
 import { HIWORLD_COOKIE_NAME } from "../../base/CookieName";
 import { NavLink, Outlet } from "react-router-dom";
 import ProfileSkeleton from "../../Components/Skileton/ProfileSkeleton";
+import { Countries } from "../../base/Country";
 
 let Profile = () => {
   let [data, setData] = useState({});
@@ -22,6 +23,16 @@ let Profile = () => {
       })
       .catch((err) => console.log(err));
   }, [fileChanged]);
+  // function convertFlagToLowerCase(flag) {
+  //   // Assuming each flag emoji occupies two Unicode characters
+  //   return flag.replace(/./g, (char) =>
+  //     String.fromCodePoint(char.codePointAt(0) + 0x20)
+  //   );
+  // }
+
+  // console.log(Countries.map((c) => convertFlagToLowerCase(c.flag)));
+
+  console.log("🇬🇩".split(""));
 
   // let handleChangeProfile = (e) => {
   //   let reader = new FileReader();
@@ -159,10 +170,27 @@ let Profile = () => {
               <div className="card">
                 <b>🏳</b>
                 <h4>Country</h4>
-                <p>{data?.user?.country}</p>
+                <p
+                  style={{ display: "flex", alignItems: "center", gap: "20px" }}
+                >
+                  {data?.user?.country}
+                  {Countries.find(
+                    (country) => country.name === data?.user?.country
+                  )?.flag ? (
+                    <img
+                      style={{ scale: "0.8" }}
+                      src={`https://flagsapi.com/${Countries.find(
+                        (country) => country.name === data?.user?.country
+                      )?.flag?.toLocaleUpperCase()}/shiny/64.png`}
+                    />
+                  ) : (
+                    ""
+                  )}
+                </p>
               </div>
             )}
           </div>
+
           {data?.user?.bio && (
             <div className="bio">
               <h3>Bio</h3>

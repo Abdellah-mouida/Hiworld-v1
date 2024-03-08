@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 let Post = (props) => {
   return (
-    <div className="post f-colum">
+    <div className="post f-colum" ref={props.postRef}>
       <header>
         {props.user.profile ? (
           <Link
