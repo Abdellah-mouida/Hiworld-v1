@@ -3,9 +3,11 @@ import Axios from "../../base/Axios";
 import { useState } from "react";
 import Error from "../../Material UI/Error";
 import { HIWORLD_COOKIE_NAME } from "../../base/CookieName";
+import Loading from "../../Components/Loading/Loading";
 let Sing = () => {
   let [err, setErr] = useState("");
   let cookie = new Cookies();
+  let [loading, setLoading] = useState(false);
 
   let send = async (e) => {
     e.preventDefault();
@@ -21,15 +23,18 @@ let Sing = () => {
       setErr("Password should Have at least 8 characters or More");
     } else {
       try {
+        setLoading(true);
         let res = await Axios.post("/sing", form);
         let userId = res.data.user._id;
         cookie.set(HIWORLD_COOKIE_NAME, userId);
         setErr("");
+        setLoading(false);
         window.location.pathname = "/home";
         console.log(res);
       } catch (err) {
-        if (err.response.status !== 201) {
-          setErr(err.response.data);
+        if (err?.response?.status !== 201) {
+          setErr(err?.response?.data);
+          setLoading(false);
         }
       }
     }
@@ -41,6 +46,7 @@ let Sing = () => {
   };
   return (
     <div className="auth-container f-center">
+      {loading && <Loading></Loading>}
       <div className="sing f-colum">
         <h2>Sing up</h2>
         <div className="form-controle">

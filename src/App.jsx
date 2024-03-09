@@ -22,6 +22,7 @@ import Cookies from "universal-cookie";
 import { HIWORLD_COOKIE_NAME } from "./base/CookieName";
 import About from "./Pages/Home/About";
 import NotFound from "./Error/404";
+import Welcome from "./Pages/Home/Welcome";
 let App = () => {
   return (
     <div className="App">
@@ -32,6 +33,7 @@ let App = () => {
         <Route path="/sing" element={<Sing></Sing>}></Route>
         <Route element={<RequireAuth></RequireAuth>}>
           <Route path="/" element={<Home></Home>}>
+            <Route path="/" element={<Welcome></Welcome>}></Route>
             <Route
               path="/profile/user/:serial_code"
               element={<PublicProfile></PublicProfile>}

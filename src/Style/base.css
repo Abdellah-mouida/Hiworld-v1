@@ -121,3 +121,25 @@ a {
   font-family: Poppins !important;
   border-radius: 30px !important;
 }
+.welcome {
+  width: 100%;
+  height: calc(100vh - 100px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+}
+.welcome h1 {
+  font-size: 15vmin;
+}
+.welcome span {
+  color: var(--Prcl);
+}
+.welcome button {
+  padding: 2vmin 7vmin;
+  font-size: 3vmin;
+}
+.welcome a {
+  text-decoration: none;
+}

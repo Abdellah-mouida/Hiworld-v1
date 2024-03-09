@@ -3,11 +3,13 @@ import Axios from "../../base/Axios";
 import { useState } from "react";
 import Error from "../../Material UI/Error";
 import { HIWORLD_COOKIE_NAME } from "../../base/CookieName";
+import Loading from "../../Components/Loading/Loading";
 
 let Login = () => {
   let [form, setForm] = useState({ email: "", password: "" });
   let [err, setErr] = useState("");
   let cookie = new Cookies();
+  let [loading, setLoading] = useState(false);
 
   let send = async (e) => {
     e.preventDefault();
@@ -19,15 +21,19 @@ let Login = () => {
       setErr("Password should Have at least 8 characters or More");
     } else {
       try {
+        setLoading(true);
         let res = await Axios.post("/login", form);
         let userId = res.data.user._id;
         cookie.set(HIWORLD_COOKIE_NAME, userId);
+        setLoading(false);
+
         setErr("");
         window.location.pathname = "/home";
         console.log(res);
       } catch (err) {
         if (err?.response?.status !== 201) {
           setErr(err?.response?.data);
+          setLoading(false);
         }
       }
     }
@@ -39,6 +45,7 @@ let Login = () => {
 
   return (
     <div className="auth-container f-center">
+      {loading && <Loading></Loading>}
       <div className="sing f-colum">
         <h2>Log in</h2>
         <div className="form-controle">
