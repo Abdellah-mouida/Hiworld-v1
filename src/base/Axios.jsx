@@ -8,7 +8,7 @@ Axios.interceptors.request.use(
   function (config) {
     // Modify config to include CORS headers
     config.headers["Access-Control-Allow-Origin"] =
-      "https://hiworld-client.onrender.com";
+      "https://hiworld-client.netlify.app";
     return config;
   },
   function (error) {
